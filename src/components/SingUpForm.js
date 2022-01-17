@@ -14,7 +14,7 @@ const SingUpForm = () => {
     validationSchema: Yup.object({
       name: Yup.string()
         .required("name is required")
-        .min(6, "Name length is not valid"),
+        .min(3, "Name length is not valid"),
       email: Yup.string()
         .email("invalid email format")
         .required("email is required"),
@@ -27,6 +27,7 @@ const SingUpForm = () => {
         .required("passwordConfirm is required")
         .oneOf([Yup.ref("password"), null], "passwords must match"),
     }),
+    validateOnMount: true,
   });
   // console.log(formik.values);
   console.log(formik.errors);
@@ -80,7 +81,9 @@ const SingUpForm = () => {
             <div className="error">{formik.errors.passwordConfirm}</div>
           )}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!formik.isValid}>
+          Submit
+        </button>
       </form>
     </div>
   );

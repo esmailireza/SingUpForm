@@ -8,8 +8,22 @@ const SingUpForm = () => {
       password: "",
     },
     onSubmit: (values) => console.log(values),
+    validate: (values) => {
+      let errors = {};
+      if (!values.name) {
+        errors.name = "Name is required";
+      }
+      if (!values.email) {
+        errors.email = "Email is required";
+      }
+      if (!values.password) {
+        errors.password = "Password is required";
+      }
+      return errors;
+    },
   });
-  console.log(formik.values);
+  // console.log(formik.values);
+  console.log(formik.errors);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -18,27 +32,39 @@ const SingUpForm = () => {
           <input
             type="text"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             name="name"
             value={formik.values.name}
           />
+          {formik.errors.name && formik.touched.name && (
+            <div className="error">{formik.errors.name}</div>
+          )}
         </div>
         <div className="formControl">
           <label>Email</label>
           <input
             type="text"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             name="email"
             value={formik.values.email}
           />
+          {formik.errors.email && formik.touched.email && (
+            <div className="error">{formik.errors.email}</div>
+          )}
         </div>
         <div className="formControl">
           <label>Password</label>
           <input
             type="text"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             name="password"
             value={formik.values.password}
           />
+          {formik.errors.password && formik.touched.password && (
+            <div className="error">{formik.errors.password}</div>
+          )}
         </div>
         <button type="submit">Submit</button>
       </form>

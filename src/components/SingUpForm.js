@@ -9,6 +9,7 @@ const SingUpForm = () => {
       phoneNumber: "",
       password: "",
       passwordConfirm: "",
+      gender: "",
     },
     onSubmit: (values) => console.log(values),
     validationSchema: Yup.object({
@@ -26,6 +27,7 @@ const SingUpForm = () => {
       passwordConfirm: Yup.string()
         .required("passwordConfirm is required")
         .oneOf([Yup.ref("password"), null], "passwords must match"),
+      gender: Yup.string().required("gender is required"),
     }),
     validateOnMount: true,
   });
@@ -80,6 +82,27 @@ const SingUpForm = () => {
           {formik.errors.passwordConfirm && formik.touched.passwordConfirm && (
             <div className="error">{formik.errors.passwordConfirm}</div>
           )}
+        </div>
+        <div className="formControl">
+          <input
+            type="radio"
+            id="0"
+            name="gender"
+            value="0"
+            onChange={formik.handleChange}
+            checked={formik.values.gender === "0"}
+          />
+          <label htmlFor="0">Male</label>
+
+          <input
+            type="radio"
+            id="1"
+            name="gender"
+            value="1"
+            onChange={formik.handleChange}
+            checked={formik.values.gender === "1"}
+          />
+          <label htmlFor="1">Female</label>
         </div>
         <button type="submit" disabled={!formik.isValid}>
           Submit

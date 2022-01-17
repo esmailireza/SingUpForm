@@ -10,9 +10,14 @@ const SingUpForm = () => {
   const changeHandler = ({ target }) => {
     setUserData({ ...userData, [target.name]: target.value });
   };
+
+  const submitHandler = (e) => {
+    console.log("dkfsf");
+    e.preventDefault();
+  };
   return (
     <div>
-      <form>
+      <form onSubmit={submitHandler}>
         <div className="formControl">
           <label>Name</label>
           <input

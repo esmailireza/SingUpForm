@@ -1,51 +1,46 @@
-import { useState } from "react";
+import { useFormik } from "formik";
 
 const SingUpForm = () => {
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    password: "",
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    onSubmit: (values) => console.log(values),
   });
-
-  const changeHandler = ({ target }) => {
-    setUserData({ ...userData, [target.name]: target.value });
-  };
-
-  const submitHandler = (e) => {
-    console.log("dkfsf");
-    e.preventDefault();
-  };
+  console.log(formik.values);
   return (
     <div>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={formik.handleSubmit}>
         <div className="formControl">
           <label>Name</label>
           <input
             type="text"
-            onChange={changeHandler}
+            onChange={formik.handleChange}
             name="name"
-            value={userData.name}
+            value={formik.values.name}
           />
         </div>
         <div className="formControl">
           <label>Email</label>
           <input
             type="text"
-            onChange={changeHandler}
+            onChange={formik.handleChange}
             name="email"
-            value={userData.email}
+            value={formik.values.email}
           />
         </div>
         <div className="formControl">
           <label>Password</label>
           <input
             type="text"
-            onChange={changeHandler}
+            onChange={formik.handleChange}
             name="password"
-            value={userData.password}
+            value={formik.values.password}
           />
         </div>
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

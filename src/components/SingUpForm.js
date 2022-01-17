@@ -24,26 +24,14 @@ const SingUpForm = () => {
       <form onSubmit={formik.handleSubmit}>
         <div className="formControl">
           <label>Name</label>
-          <input
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name="name"
-            value={formik.values.name}
-          />
+          <input type="text" {...formik.getFieldProps("name")} name="name" />
           {formik.errors.name && formik.touched.name && (
             <div className="error">{formik.errors.name}</div>
           )}
         </div>
         <div className="formControl">
           <label>Email</label>
-          <input
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name="email"
-            value={formik.values.email}
-          />
+          <input type="text" {...formik.getFieldProps("email")} name="email" />
           {formik.errors.email && formik.touched.email && (
             <div className="error">{formik.errors.email}</div>
           )}
@@ -52,10 +40,8 @@ const SingUpForm = () => {
           <label>Password</label>
           <input
             type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            {...formik.getFieldProps("password")}
             name="password"
-            value={formik.values.password}
           />
           {formik.errors.password && formik.touched.password && (
             <div className="error">{formik.errors.password}</div>

@@ -4,6 +4,12 @@ import { useEffect } from "react";
 import { useState } from "react/cjs/react.development";
 import * as Yup from "yup";
 import Input from "./common/input";
+import RadioInput from "./common/radioInput";
+
+const radioOptions = [
+  { label: "male", value: "0" },
+  { label: "female", value: "1" },
+];
 
 const SingUpForm = () => {
   const [formValues, setFormValues] = useState(null);
@@ -62,31 +68,7 @@ const SingUpForm = () => {
           formik={formik}
           type="password"
         />
-
-        <div className="formControl">
-          <input
-            type="radio"
-            id="0"
-            name="gender"
-            value="0"
-            onChange={formik.handleChange}
-            checked={formik.values.gender === "0"}
-          />
-          <label htmlFor="0">Male</label>
-
-          <input
-            type="radio"
-            id="1"
-            name="gender"
-            value="1"
-            onChange={formik.handleChange}
-            checked={formik.values.gender === "1"}
-          />
-          <label htmlFor="1">Female</label>
-          {formik.errors.gender && formik.touched.gender && (
-            <div className="error">{formik.errors.gender}</div>
-          )}
-        </div>
+        <RadioInput formik={formik} radioOptions={radioOptions} name="gender" />
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>

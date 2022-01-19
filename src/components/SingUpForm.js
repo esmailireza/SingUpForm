@@ -3,12 +3,25 @@ import { useFormik } from "formik";
 import { useEffect } from "react";
 import { useState } from "react/cjs/react.development";
 import * as Yup from "yup";
+import CheckBoxInput from "./common/CheckBoxInput";
 import Input from "./common/input";
 import RadioInput from "./common/radioInput";
+import SelectComponent from "./common/SelectComponent";
+const checkBoxOptions = [
+  { label: "React.js", value: "React.js" },
+  { label: "Vue.js", value: "Vue.js" },
+];
 
 const radioOptions = [
   { label: "male", value: "0" },
   { label: "female", value: "1" },
+];
+
+const selectOptions = [
+  { label: "select nationality ...", value: "" },
+  { label: "Iran", value: "IR" },
+  { label: "Germany", value: "GER" },
+  { label: "USA", value: "US" },
 ];
 
 const SingUpForm = () => {
@@ -21,6 +34,8 @@ const SingUpForm = () => {
       password: "",
       passwordConfirm: "",
       gender: "",
+      nationality: "",
+      intrests: [],
     },
     onSubmit: (values) => console.log(values),
     validationSchema: Yup.object({
@@ -39,6 +54,8 @@ const SingUpForm = () => {
         .required("passwordConfirm is required")
         .oneOf([Yup.ref("password"), null], "passwords must match"),
       gender: Yup.string().required("gender is required"),
+      nationality: Yup.string().required("select is required"),
+      intrests: Yup.array().min(1).required("at least select one experties"),
     }),
     validateOnMount: true,
     enableReinitialize: true,
@@ -50,6 +67,7 @@ const SingUpForm = () => {
       .then((res) => setFormValues(res.data))
       .catch((err) => console.log(err));
   }, []);
+  console.log(formik.values);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -69,6 +87,16 @@ const SingUpForm = () => {
           type="password"
         />
         <RadioInput formik={formik} radioOptions={radioOptions} name="gender" />
+        <SelectComponent
+          selectOptions={selectOptions}
+          name="nationality"
+          formik={formik}
+        />
+        <CheckBoxInput
+          formik={formik}
+          checkBoxOptions={checkBoxOptions}
+          name="intrests"
+        />
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>

@@ -6,7 +6,9 @@
     "phoneNumber": "09140000000",
     "password": "12345",
     "passwordConfirm": "12345",
-    "gender": "0"
+    "gender": "0",
+    "nationality":"US",
+    "intrests":["React.js"]
   }
   ]
 }

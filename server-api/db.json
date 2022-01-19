@@ -1,14 +1,18 @@
 {
-  "users": [{
-    "id":1,
-    "name": "reza",
-    "email": "esmaili@gmail.com",
-    "phoneNumber": "09140000000",
-    "password": "12345",
-    "passwordConfirm": "12345",
-    "gender": "0",
-    "nationality":"US",
-    "intrests":["React.js"]
-  }
+  "users": [
+    {
+      "name": "reza",
+      "email": "esmailireza20@gmail.com",
+      "phoneNumber": "09140000000",
+      "password": "1234",
+      "passwordConfirm": "1234",
+      "gender": "1",
+      "nationality": "IR",
+      "intrests": [
+        "React.js"
+      ],
+      "terms": true,
+      "id": 1
+    }
   ]
 }

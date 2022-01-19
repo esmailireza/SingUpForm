@@ -24,8 +24,16 @@ const selectOptions = [
   { label: "USA", value: "US" },
 ];
 
+const onSubmit = (values) => {
+  axios
+    .post("http://localhost:3001/users", values)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+};
+
 const SingUpForm = () => {
   const [formValues, setFormValues] = useState(null);
+
   const formik = useFormik({
     initialValues: formValues || {
       name: "",
@@ -36,8 +44,9 @@ const SingUpForm = () => {
       gender: "",
       nationality: "",
       intrests: [],
+      terms: false,
     },
-    onSubmit: (values) => console.log(values),
+
     validationSchema: Yup.object({
       name: Yup.string()
         .required("name is required")
@@ -56,9 +65,13 @@ const SingUpForm = () => {
       gender: Yup.string().required("gender is required"),
       nationality: Yup.string().required("select is required"),
       intrests: Yup.array().min(1).required("at least select one experties"),
+      terms: Yup.boolean()
+        .required("The terms and conditions must be accepted.")
+        .oneOf([true], "The terms and conditions must be accepted."),
     }),
     validateOnMount: true,
     enableReinitialize: true,
+    onSubmit,
   });
 
   useEffect(() => {
@@ -67,7 +80,7 @@ const SingUpForm = () => {
       .then((res) => setFormValues(res.data))
       .catch((err) => console.log(err));
   }, []);
-  console.log(formik.values);
+  //console.log(formik.values);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -97,6 +110,18 @@ const SingUpForm = () => {
           checkBoxOptions={checkBoxOptions}
           name="intrests"
         />
+        <input
+          type="checkbox"
+          id="terms"
+          name="terms"
+          value={true}
+          onChange={formik.handleChange}
+          checked={formik.values.terms}
+        />
+        <label htmlFor="terms">Terms and Conditions</label>
+        {formik.errors.terms && formik.touched.terms && (
+          <div className="error">{formik.errors.terms}</div>
+        )}
         <button type="submit" disabled={!formik.isValid}>
           Submit
         </button>

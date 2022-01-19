@@ -1,0 +1,12 @@
+{
+  "users": [{
+    "id":1,
+    "name": "reza",
+    "email": "esmaili@gmail.com",
+    "phoneNumber": "09140000000",
+    "password": "12345",
+    "passwordConfirm": "12345",
+    "gender": "0"
+  }
+  ]
+}

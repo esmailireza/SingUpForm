@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { useEffect } from "react";
 import { useState } from "react/cjs/react.development";
 import * as Yup from "yup";
+import Input from "./common/input";
 
 const SingUpForm = () => {
   const [formValues, setFormValues] = useState(null);
@@ -46,53 +47,22 @@ const SingUpForm = () => {
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
-        <div className="formControl">
-          <label>Name</label>
-          <input type="text" {...formik.getFieldProps("name")} name="name" />
-          {formik.errors.name && formik.touched.name && (
-            <div className="error">{formik.errors.name}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>Email</label>
-          <input type="text" {...formik.getFieldProps("email")} name="email" />
-          {formik.errors.email && formik.touched.email && (
-            <div className="error">{formik.errors.email}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>phone Number</label>
-          <input
-            type="text"
-            {...formik.getFieldProps("phoneNumber")}
-            name="phoneNumber"
-          />
-          {formik.errors.phoneNumber && formik.touched.phoneNumber && (
-            <div className="error">{formik.errors.phoneNumber}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>Password</label>
-          <input
-            type="password"
-            {...formik.getFieldProps("password")}
-            name="password"
-          />
-          {formik.errors.password && formik.touched.password && (
-            <div className="error">{formik.errors.password}</div>
-          )}
-        </div>
-        <div className="formControl">
-          <label>Password Confirmation</label>
-          <input
-            type="password"
-            {...formik.getFieldProps("passwordConfirm")}
-            name="passwordConfirm"
-          />
-          {formik.errors.passwordConfirm && formik.touched.passwordConfirm && (
-            <div className="error">{formik.errors.passwordConfirm}</div>
-          )}
-        </div>
+        <Input label="name" name="name" formik={formik} />
+        <Input label="email" name="email" formik={formik} />
+        <Input label="phoneNumber" name="phoneNumber" formik={formik} />
+        <Input
+          label="password"
+          name="password"
+          formik={formik}
+          type="password"
+        />
+        <Input
+          label="passwordConfirm"
+          name="passwordConfirm"
+          formik={formik}
+          type="password"
+        />
+
         <div className="formControl">
           <input
             type="radio"

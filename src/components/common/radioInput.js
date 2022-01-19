@@ -18,6 +18,9 @@ const RadioInput = ({ name, formik, radioOptions }) => {
           </React.Fragment>
         );
       })}
+      {formik.errors[name] && formik.touched[name] && (
+        <div className="error">{formik.errors[name]}</div>
+      )}
     </div>
   );
 };

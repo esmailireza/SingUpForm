@@ -80,7 +80,6 @@ const SingUpForm = () => {
       .then((res) => setFormValues(res.data))
       .catch((err) => console.log(err));
   }, []);
-  //console.log(formik.values);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
